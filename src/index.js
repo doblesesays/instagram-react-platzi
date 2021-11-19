@@ -1,0 +1,1 @@
+console.log("Configuration of webpack")
