@@ -1,8 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { Category } from './../Category/index'
 import { List, Item } from './styles'
 
 export const ListOfCategories = () => {
+  const [categories, setCategories] = useState([])
+
+  useEffect(() => {
+    window.fetch('https://petgram-server-doblesesays.vercel.app/categories')
+      .then(res => res.json())
+      .then(response => {
+        setCategories(response)
+      })
+  }, [])
+
   return (
     <List>
       {
@@ -13,48 +23,3 @@ export const ListOfCategories = () => {
     </List>
   )
 }
-
-export const categories = [
-  {
-    id: 1,
-    name: 'cats',
-    emoji: '🐱',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_cats.jpg',
-    path: '/photos/cats'
-  },
-  {
-    id: 2,
-    name: 'dogs',
-    emoji: '🐶',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_dogs.jpg',
-    path: '/photos/dogs'
-  },
-  {
-    id: 3,
-    name: 'hamsters',
-    emoji: '🐹',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_hamsters.jpg',
-    path: '/photos/hamsters'
-  },
-  {
-    id: 4,
-    name: 'rabbits',
-    emoji: '🐰',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_rabbits.jpg',
-    path: '/photos/rabbits'
-  },
-  {
-    id: 5,
-    name: 'birds',
-    emoji: '🐦',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_birds.jpg',
-    path: '/photos/birds'
-  },
-  {
-    id: 6,
-    name: 'fishes',
-    emoji: '🐠',
-    cover: 'https://res.cloudinary.com/midudev/image/upload/w_150/v1555671700/category_fishes.jpg',
-    path: '/photos/fishes'
-  }
-]
