@@ -6,11 +6,15 @@ import { Home } from './pages/Home'
 import { Router } from '@reach/router'
 import { Detail } from './pages/Detail'
 import { NavBar } from './components/NavBar'
+import { Favs } from './pages/Favs'
+import { User } from './pages/User'
+import { NotRegisterUser } from './pages/NotRegisterUser'
+
+const UserLogged = ({ children }) => {
+  return children({ isAuth: true })
+}
 
 export const App = () => {
-  const urlParams = new window.URLSearchParams(window.location.search)
-  const detailId = urlParams.get('detail')
-
   return (
     <>
       <GlobalStyles />
@@ -20,6 +24,20 @@ export const App = () => {
         <Home path='/pet/:id' />
         <Detail path='/detail/:detailId' />
       </Router>
+      <UserLogged>
+        {
+          ({ isAuth }) =>
+            isAuth
+              ? <Router>
+                <Favs path='/favs' />
+                <User path='/user' />
+              </Router>
+              : <Router>
+                <NotRegisterUser path='/favs' />
+                <NotRegisterUser path='/user' />
+              </Router>
+        }
+      </UserLogged>
       <NavBar />
     </>
   )
