@@ -1,5 +1,5 @@
-import React from 'react';
-import { useInputValue } from '../../hooks/useInputValue';
+import React from 'react'
+import { useInputValue } from '../../hooks/useInputValue'
 
 export const UserForm = ({ onSubmit }) => {
 
@@ -7,7 +7,7 @@ export const UserForm = ({ onSubmit }) => {
     const password = useInputValue('')
 
     return(
-        <form onSubmit={onSubmit}>
+        <form onSubmit={ onSubmit }>
             <input type="text" placeholder='Email' {...email} />
             <input type="password" placeholder='Password' {...password} />
             <button>Loggin</button>
