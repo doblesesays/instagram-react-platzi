@@ -1,5 +1,6 @@
 const HtmlWebpackPluging = require('html-webpack-plugin')
 const WebpackPwaManifestPlugin = require('webpack-pwa-manifest')
+const WorkboxWebpackPlugin = require('workbox-webpack-plugin')
 const path = require('path')
 
 module.exports = {
@@ -30,6 +31,25 @@ module.exports = {
           purpose: 'maskable any'
         }
       ],
+    }),
+    new WorkboxWebpackPlugin.GenerateSW({
+      maximumFileSizeToCacheInBytes: 5000000,
+      runtimeCaching: [
+        {
+          urlPattern: new RegExp('https://res.cloudinary.com|images.unsplash.com'),
+          handler: 'CacheFirst',
+          options: {
+            cacheName: 'images'
+          }
+        },
+        {
+          urlPattern: new RegExp('https://petgram-server-doblesesays.vercel.app'),
+          handler: 'NetworkFirst',
+          options: {
+            cacheName: 'api'
+          }
+        }
+      ]
     })
   ],
   module: {
